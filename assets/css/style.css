@@ -1,0 +1,20 @@
+.navbar {
+	background-color: #1D3B71;
+	/*border: 3px solid #99C76C;*/
+	/*font-size: 35px;*/
+	color: white;
+	padding: 30px;
+	width: 100%;
+}
+
+.heading-text {
+	color: #1D3B71;
+}
+
+.table {
+	border: 2px solid #1D3B71;
+}
+
+.table-wrapper {
+	margin-top: 30px;
+}
