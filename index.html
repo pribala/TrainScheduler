@@ -3,22 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Train Scheduler</title>
+	<link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://use.fontawesome.com/c4965b9a48.js"></script>
 </head>
 <body>
-	<div class="jumbotron text-center">
-		<h1 class="display-3">Find Your Train!</h1>
-		<p class="lead"></p>
-	</div>
 	<div class="container">
+		<div class="jumbotron text-center">
+			<h1 class="display-3">Find Your Train!</h1>
+			<p class="lead"></p>
+		</div>
+	
 		<div class="row">
 			<div class="col-sm-4">
 		    	<div class="card">
                     
                     <div class="card-header">
-                        Add Train
+                        <i class="fa fa-train" aria-hidden="true"></i> <strong>Add Train</strong>
                     </div>
 
                     <div class="card-body input-card">
@@ -42,7 +45,7 @@
                                 <input type="number" class="form-control" id="frequency" placeholder="Enter frequency">
                             </div>
 
-                            <button type="submit" class="btn btn-danger" id="addTrain">Submit</button>
+                            <button type="submit" class="btn btn-danger" id="addTrain"><i class="fa fa-train" aria-hidden="true"></i> Submit</button>
                         </form>
                     </div>
                 </div>
@@ -50,7 +53,7 @@
   			<div class="col-sm-8">
     			<div class="card">
                     <div class="card-header">
-                        Current Train Schedule
+                        <strong>Current Train Schedule</strong>
                     </div>
                     <div class="card-body">
 	                    <table class="table">

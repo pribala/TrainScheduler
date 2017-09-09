@@ -5,10 +5,12 @@ html, body {
 .jumbotron {
 	background-color: #AA3939;
 	color: white;
+	font-family: 'Fredericka the Great', cursive;
 }
 
 .card-header {
 	background-color: #FFB77B;
+	color: #AA3939;
 }
 
 .input-card {
@@ -34,4 +36,12 @@ html, body {
 
 td {
 	text-align: center;
+}
+
+thead {
+	color: #AA3939;
+}
+
+label {
+	color: #AA3939;
 }
