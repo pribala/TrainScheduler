@@ -101,8 +101,11 @@ $(document).ready(function () {
         }else {
             firebase.auth().signOut().then(function() {
               // Sign-out successful.
+              status = false;
+              console.log('Signout Succesfull')
             }).catch(function(error) {
               // An error happened.
+              console.log('Signout Failed')  
             });
         }
         });
