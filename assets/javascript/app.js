@@ -22,6 +22,7 @@ $(document).ready(function () {
     var unixTime = 0;
     var nextTrain = 0;
     var tMinutesTillTrain = 0;
+    var status = false;
     
 
     // Function to capitalize the first letter of each category
@@ -95,13 +96,22 @@ $(document).ready(function () {
 
         var provider = new firebase.auth.GoogleAuthProvider();
         $("#signIn").click(function() {
+            if(!status){
             firebase.auth().signInWithRedirect(provider);
+        }else {
+            firebase.auth().signOut().then(function() {
+              // Sign-out successful.
+            }).catch(function(error) {
+              // An error happened.
+            });
+        }
         });
 
         firebase.auth().getRedirectResult().then(function(result) {
           if (result.credential) {
             // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
+            status = true;
             // ...
             $("#signIn").text("Signout");
           }
