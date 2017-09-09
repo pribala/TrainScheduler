@@ -5,7 +5,10 @@ html, body {
 .jumbotron {
 	background-color: #AA3939;
 	color: white;
+	font-weight: bold;
 	font-family: 'Fredericka the Great', cursive;
+	background-image: url("../images/train-crop.jpg");
+	background-repeat: no-repeat;
 }
 
 .card-header {
@@ -54,3 +57,8 @@ label {
 .left-panel {
 	margin-bottom: 40px;
 }
+
+/*.img-fluid {
+	height: 250px;
+	width: 100%;
+}*/
