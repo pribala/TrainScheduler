@@ -84,8 +84,9 @@ $(document).ready(function () {
         var trainFrequency = $("<td>").text(sv.frequency);
         var nextTrainTime = $("<td>").text(moment(nextTrain).format("HH:mm"));
         var trainInMinutes = $("<td>").text(tMinutesTillTrain);
+        var dataButtons = $("<td>").html('<span class="btnClass"><i class="fa fa-trash" aria-hidden="true"></i></span><span class="btnClass"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>');
        
-        tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes);
+        tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
         // Handle the errors
     }, function (errorObject) {

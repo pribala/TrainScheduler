@@ -45,3 +45,12 @@ thead {
 label {
 	color: #AA3939;
 }
+
+.btnClass {
+	margin-right: 10px;
+	color: #AA3939;
+}
+
+.left-panel {
+	margin-bottom: 40px;
+}
