@@ -92,4 +92,10 @@ $(document).ready(function () {
     }, function (errorObject) {
         console.log("Errors handled: " + errorObject.code);
     });
+
+        var provider = new firebase.auth.GoogleAuthProvider();
+        $("#signIn").click(function() {
+            firebase.auth().signInWithRedirect(provider);
+        });
+
     });
