@@ -11,6 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://use.fontawesome.com/c4965b9a48.js"></script>
   <script src="assets/javascript/validator.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
 </head>
 <body>
   <div class="container-fluid">
@@ -62,7 +63,19 @@
     </div>
   </div>
   <script>
+  var frequency = 0;
     $('form').validator();
+    $("#addTrain").on("click", function (event) {
+        event.preventDefault();
+        trainName = $("#trainName").val().trim();
+            destination = $("#destination").val().trim();
+            firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
+            unixTime = moment(firstTrainTime, "HHmm").unix();
+            frequency = $("#frequency").val().trim();
+            if(trainName && destination && frequency &&firstTrainTime){
+              alert("hi");
+            }
+    });    
   </script>
 </body>
 </html>    

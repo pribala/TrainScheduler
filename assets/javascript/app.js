@@ -48,12 +48,13 @@ $(document).ready(function () {
             unixTime = moment(firstTrainTime, "HHmm").unix();
             frequency = $("#frequency").val().trim();
             if(trainName && destination && firstTrainTime && frequency){
-                database.ref().push({
-                      trainName: trainName,
-                      destination: destination,
-                      firstTrainTime: unixTime,
-                      frequency: frequency
-                })
+                console.log("inside if");
+                // database.ref().push({
+                //       trainName: trainName,
+                //       destination: destination,
+                //       firstTrainTime: unixTime,
+                //       frequency: frequency
+                // })
 
                 // Clear the input fields after data is added to database
                 $("#message").text("");
@@ -63,6 +64,7 @@ $(document).ready(function () {
                 $("#firstTrainTime").val("");
                 $("#frequency").val("");
             }else {
+                console.log("inside else");
                 $("#message").text("All form fields are required.");
             }
          }else {
