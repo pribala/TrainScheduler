@@ -37,9 +37,8 @@ $(document).ready(function () {
     
     // Add new value to database when add train button is clicked
     $("#addTrain").on("click", function (event) {
-
         event.preventDefault();
-        if(!status){
+        if(status){
             trainName = capitalizeStr($("#trainName").val().trim());
             destination = capitalizeStr($("#destination").val().trim());
             firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
@@ -126,7 +125,7 @@ $(document).ready(function () {
           }
           // The signed-in user info.
           var user = result.user;
-          console.log(user);
+          console.log(user.displayName);
         }).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
