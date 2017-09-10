@@ -49,12 +49,12 @@ $(document).ready(function () {
             frequency = $("#frequency").val().trim();
             if(trainName && destination && firstTrainTime && frequency){
                 console.log("inside if");
-                // database.ref().push({
-                //       trainName: trainName,
-                //       destination: destination,
-                //       firstTrainTime: unixTime,
-                //       frequency: frequency
-                // })
+                database.ref().push({
+                    trainName: trainName,
+                    destination: destination,
+                    firstTrainTime: unixTime,
+                    frequency: frequency
+                })
 
                 // Clear the input fields after data is added to database
                 $("#message").text("");
