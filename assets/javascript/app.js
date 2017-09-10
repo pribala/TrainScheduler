@@ -49,7 +49,6 @@ $(document).ready(function () {
             unixTime = moment(firstTrainTime, "HHmm").unix();
             frequency = $("#frequency").val().trim();
             if(trainName && destination && firstTrainTime && frequency){
-                console.log("inside if");
                 database.ref().push({
                     trainName: trainName,
                     destination: destination,
@@ -65,12 +64,10 @@ $(document).ready(function () {
                 $("#firstTrainTime").val("");
                 $("#frequency").val("");
             }else {
-                console.log("inside else");
                 $("#message").text("All form fields are required.");
             }
          }else {
-             console.log("Sign In to check train times!");
-             $("#message").text("Sign In to check train times!");
+            $("#message").text("Sign In to check train times!");
          }
     });
 
@@ -82,18 +79,15 @@ $(document).ready(function () {
         // Current Time
         var currentTime = moment();
         var diffTime =moment(currentTime,"X").diff(moment(sv.firstTrainTime,"X"), "minutes");
-        //console.log("DIFFERENCE IN TIME: " + diffTime);
+        
         var tRemainder = diffTime % sv.frequency;
-        //console.log(tRemainder);
-
+        
         // Minute Until Train
         tMinutesTillTrain = sv.frequency - tRemainder;
-        //console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
-    
+            
         // Next Train
         nextTrain = moment().add(tMinutesTillTrain, "minutes");
-        //console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
-        
+               
         var tableRow = $("<tr>");
         var name = $("<td>").text(sv.trainName);
         var trainDestination = $("<td>").text(sv.destination);
@@ -152,29 +146,4 @@ $(document).ready(function () {
           console.log(credential);
           // ...
         });
-        // $.validator.setDefaults( {
-        //     submitHandler: function () {
-        //         alert( "submitted!" );
-        //     }
-        // } );
-
-
-        // $("#inputform").validate({
-
-        //   rules: {
-        //     // simple rule, converted to {required:true}
-        //     trainName: "required",
-        //     destination: "required",
-        //     firstTrainTime: "required",
-        //     frequency: "required"
-        //   },
-        //   messages: {
-        //             trainName: "Please enter train name",
-        //             destination: "Please enter destination",
-        //             firstTrainTime: "Please enter train time",
-        //             frequency: "Please enter frequency"
-        //   }          
-
-        // });
-
     });
