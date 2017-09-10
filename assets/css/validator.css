@@ -1,0 +1,16 @@
+.help-block
+{
+	display : none;
+}
+
+.has-error--required .help-block.error--required,
+.has-error--callback .help-block.error--callback,
+.has-error--pattern .help-block.error--pattern,
+.has-error--equals .help-block.error--equals,
+.has-error--length .help-block.error--length,
+.has-error--or .help-block.error--or
+{
+
+	display : block;
+	color: red;
+}

@@ -34,11 +34,14 @@ $(document).ready(function () {
         });
         return newStr;
     }
+
+    $('#inputForm').validator();
     
     // Add new value to database when add train button is clicked
     $("#addTrain").on("click", function (event) {
         event.preventDefault();
-        if(status){
+        
+          if(status){
             trainName = capitalizeStr($("#trainName").val().trim());
             destination = capitalizeStr($("#destination").val().trim());
             firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
@@ -46,11 +49,11 @@ $(document).ready(function () {
             frequency = $("#frequency").val().trim();
 
             database.ref().push({
-                 trainName: trainName,
-                 destination: destination,
-                 firstTrainTime: unixTime,
-                 frequency: frequency
-             })
+                  trainName: trainName,
+                  destination: destination,
+                  firstTrainTime: unixTime,
+                  frequency: frequency
+            })
 
             // Clear the input fields after data is added to database
             $("#message").text("");
@@ -59,10 +62,10 @@ $(document).ready(function () {
             $("#destination").val("");
             $("#firstTrainTime").val("");
             $("#frequency").val("");
-        }else {
-            console.log("Sign In to check train times!");
-            $("#message").text("Sign In to check train times!");
-        }
+         }else {
+             console.log("Sign In to check train times!");
+             $("#message").text("Sign In to check train times!");
+         }
     });
 
     // Function checks for new child added to database and updates the html display    
@@ -143,5 +146,29 @@ $(document).ready(function () {
           console.log(credential);
           // ...
         });
+        // $.validator.setDefaults( {
+        //     submitHandler: function () {
+        //         alert( "submitted!" );
+        //     }
+        // } );
+
+
+        // $("#inputform").validate({
+
+        //   rules: {
+        //     // simple rule, converted to {required:true}
+        //     trainName: "required",
+        //     destination: "required",
+        //     firstTrainTime: "required",
+        //     frequency: "required"
+        //   },
+        //   messages: {
+        //             trainName: "Please enter train name",
+        //             destination: "Please enter destination",
+        //             firstTrainTime: "Please enter train time",
+        //             frequency: "Please enter frequency"
+        //   }          
+
+        // });
 
     });
