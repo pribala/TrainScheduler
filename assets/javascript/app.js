@@ -45,6 +45,7 @@ $(document).ready(function () {
             trainName = capitalizeStr($("#trainName").val().trim());
             destination = capitalizeStr($("#destination").val().trim());
             firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
+            firstTrainTime = moment(firstTrainTime, "HHmm").subtract(1, "years");
             unixTime = moment(firstTrainTime, "HHmm").unix();
             frequency = $("#frequency").val().trim();
             if(trainName && destination && firstTrainTime && frequency){

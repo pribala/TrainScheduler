@@ -57,8 +57,11 @@
     var firstTime = "23:30";
     //firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
       //  unixTime = moment(firstTrainTime, "HHmm").unix();
-
+var newTime = moment(firstTime, "HH:mm").subtract(1, "years");
+console.log("new time "+newTime);
     // First Time (pushed back 1 year to make sure it comes before current time)
+     var newTimeConverted = moment(newTime, "HH:mm").format("HHmm");
+     console.log("converted " +newTimeConverted);
     var firstTimeConverted = moment(firstTime, "HH:mm").format("HHmm");
     console.log(firstTimeConverted);
     var unixTime = moment(firstTimeConverted, "HHmm").unix();
