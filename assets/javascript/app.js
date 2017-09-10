@@ -39,24 +39,29 @@ $(document).ready(function () {
     $("#addTrain").on("click", function (event) {
 
         event.preventDefault();
-        trainName = capitalizeStr($("#trainName").val().trim());
-        destination = capitalizeStr($("#destination").val().trim());
-        firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
-        unixTime = moment(firstTrainTime, "HHmm").unix();
-        frequency = $("#frequency").val().trim();
+        if(!status){
+            trainName = capitalizeStr($("#trainName").val().trim());
+            destination = capitalizeStr($("#destination").val().trim());
+            firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
+            unixTime = moment(firstTrainTime, "HHmm").unix();
+            frequency = $("#frequency").val().trim();
 
-        database.ref().push({
-             trainName: trainName,
-             destination: destination,
-             firstTrainTime: unixTime,
-             frequency: frequency
-         })
+            database.ref().push({
+                 trainName: trainName,
+                 destination: destination,
+                 firstTrainTime: unixTime,
+                 frequency: frequency
+             })
 
-        // Clear the input fields after data is added to database
-        $("#trainName").val("");
-        $("#destination").val("");
-        $("#firstTrainTime").val("");
-        $("#frequency").val("");
+            // Clear the input fields after data is added to database
+            $("#trainName").val("");
+            $("#destination").val("");
+            $("#firstTrainTime").val("");
+            $("#frequency").val("");
+        }else {
+            console.log("Sign In to check train times!");
+            $("#message").text("Sign In to check train times!");
+        }
     });
 
     // Function checks for new child added to database and updates the html display    
@@ -97,17 +102,18 @@ $(document).ready(function () {
         var provider = new firebase.auth.GoogleAuthProvider();
         $("#signIn").click(function() {
             if(!status){
-            firebase.auth().signInWithRedirect(provider);
-        }else {
-            firebase.auth().signOut().then(function() {
-              // Sign-out successful.
-              status = false;
-              console.log('Signout Succesfull')
-            }).catch(function(error) {
-              // An error happened.
-              console.log('Signout Failed')  
-            });
-        }
+                firebase.auth().signInWithRedirect(provider);
+            }else {
+                firebase.auth().signOut().then(function() {
+                  // Sign-out successful.
+                  status = false;
+                  $("#signIn").text("Google SignIn");
+                  console.log('Signout Succesfull')
+                }).catch(function(error) {
+                  // An error happened.
+                  console.log('Signout Failed')  
+                });
+            }
         });
 
         firebase.auth().getRedirectResult().then(function(result) {
@@ -120,6 +126,7 @@ $(document).ready(function () {
           }
           // The signed-in user info.
           var user = result.user;
+          console.log(user);
         }).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
