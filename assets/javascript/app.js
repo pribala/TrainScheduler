@@ -47,21 +47,24 @@ $(document).ready(function () {
             firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
             unixTime = moment(firstTrainTime, "HHmm").unix();
             frequency = $("#frequency").val().trim();
+            if(trainName && destination && firstTrainTime && frequency){
+                database.ref().push({
+                      trainName: trainName,
+                      destination: destination,
+                      firstTrainTime: unixTime,
+                      frequency: frequency
+                })
 
-            database.ref().push({
-                  trainName: trainName,
-                  destination: destination,
-                  firstTrainTime: unixTime,
-                  frequency: frequency
-            })
-
-            // Clear the input fields after data is added to database
-            $("#message").text("");
-            $("#welcomeMessage").text("");
-            $("#trainName").val("");
-            $("#destination").val("");
-            $("#firstTrainTime").val("");
-            $("#frequency").val("");
+                // Clear the input fields after data is added to database
+                $("#message").text("");
+                $("#welcomeMessage").text("");
+                $("#trainName").val("");
+                $("#destination").val("");
+                $("#firstTrainTime").val("");
+                $("#frequency").val("");
+            }else {
+                $("#message").text("All form fields are required.");
+            }
          }else {
              console.log("Sign In to check train times!");
              $("#message").text("Sign In to check train times!");
