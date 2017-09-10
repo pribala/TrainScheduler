@@ -53,6 +53,7 @@ $(document).ready(function () {
              })
 
             // Clear the input fields after data is added to database
+            $("#message").text("");
             $("#welcomeMessage").text("");
             $("#trainName").val("");
             $("#destination").val("");
@@ -127,7 +128,7 @@ $(document).ready(function () {
           // The signed-in user info.
           var user = result.user;
           console.log(user.displayName);
-          $("#welcomeMessage").text(user.displayName);
+          $("#welcomeMessage").text("Hello "+user.displayName);
         }).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;

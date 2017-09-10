@@ -58,7 +58,8 @@ label {
 	margin-bottom: 40px;
 }
 
-/*.img-fluid {
-	height: 250px;
-	width: 100%;
-}*/
+.msgDisplay {
+	color: #AA3939;
+	font-weight: bold;
+	font-family: 'Fredericka the Great', cursive;
+}
