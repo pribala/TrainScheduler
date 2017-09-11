@@ -174,13 +174,13 @@ $(document).ready(function () {
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
   }
-  
+
   setTimeout(function(){
    // window.location.reload(1);
     $('#right-pane').load('property-detailed.php #right-pane', function() {
 
            /// can add another function here
       });     
-    }, 60000);    
+    }, 3000);    
 });
 
