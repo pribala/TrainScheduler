@@ -24,7 +24,6 @@ $(document).ready(function () {
   var status = false;
   var myKey = "";
     
-
   // Function to capitalize the first letter of each category
   function capitalizeStr(str) {
     var strArray = str.split(" ");
@@ -80,35 +79,6 @@ $(document).ready(function () {
     // storing the snapshot.val() in a variable for convenience
     var sv = snapshot.val();
     renderTable(sv);
-    
-    //Current Time
-    // var currentTime = moment();
-    // var diffTime =moment(currentTime,"X").diff(moment(sv.firstTrainTime,"X"), "minutes");
-        
-    // var tRemainder = diffTime % sv.frequency;
-        
-    // // Minute Until Train
-    // tMinutesTillTrain = sv.frequency - tRemainder;
-            
-    // // Next Train
-    // nextTrain = moment().add(tMinutesTillTrain, "minutes");
-               
-    // var tableRow = $("<tr>");
-    // var name = $("<td>").text(sv.trainName);
-    // var trainDestination = $("<td>").text(sv.destination);
-    // var trainFrequency = $("<td>").text(sv.frequency);
-    // var nextTrainTime = $("<td>").text(moment(nextTrain).format("HH:mm"));
-    // var trainInMinutes = $("<td>").text(tMinutesTillTrain);
-    // var dataButtons = $("<td>");
-    // var btn = $("<button>");
-    // btn.addClass("btnClass");
-    // btn.attr("id", "delete");
-    // btn.html("<i class='fa fa-trash' aria-hidden='true'>");
-    // btn.attr("data-key", sv.id);
-    // dataButtons.append(btn);
-         
-    // tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
-    // $("#tableBody").append(tableRow);
     // Handle the errors
   }, function (errorObject) {
       console.log("inside added");
@@ -178,6 +148,7 @@ $(document).ready(function () {
   function renderTable(sv) {
       // Current Time
         var currentTime = moment();
+        
         var diffTime =moment(currentTime,"X").diff(moment(sv.firstTrainTime,"X"), "minutes");
         
         var tRemainder = diffTime % sv.frequency;
@@ -187,7 +158,6 @@ $(document).ready(function () {
             
         // Next Train
         nextTrain = moment().add(tMinutesTillTrain, "minutes");
-               
         var tableRow = $("<tr>");
         var name = $("<td>").text(sv.trainName);
         var trainDestination = $("<td>").text(sv.destination);
@@ -203,6 +173,13 @@ $(document).ready(function () {
         dataButtons.append(btn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
-  }    
+  }
+  setTimeout(function(){
+   // window.location.reload(1);
+    $('#right-pane').load('property-detailed.php #right-pane', function() {
+
+           /// can add another function here
+      });     
+    }, 60000);    
 });
 
