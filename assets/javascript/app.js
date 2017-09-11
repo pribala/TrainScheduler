@@ -155,7 +155,7 @@ $(document).ready(function () {
         
         // Minute Until Train
         tMinutesTillTrain = sv.frequency - tRemainder;
-            
+        // setTimeout(function() {    
         // Next Train
         nextTrain = moment().add(tMinutesTillTrain, "minutes");
         var tableRow = $("<tr>");
@@ -173,14 +173,15 @@ $(document).ready(function () {
         dataButtons.append(btn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
+      // }, 3000);
   }
 
-  setTimeout(function(){
-   // window.location.reload(1);
-    $('#right-pane').load('property-detailed.php #right-pane', function() {
+  // setTimeout(function(){
+  //  // window.location.reload(1);
+  //   $('#right-pane').load('property-detailed.php #right-pane', function() {
 
-           /// can add another function here
-      });     
-    }, 3000);    
+  //          /// can add another function here
+  //     });     
+  //   }, 3000);    
 });
 
