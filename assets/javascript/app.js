@@ -176,12 +176,12 @@ $(document).ready(function () {
       // }, 3000);
   }
 
-  // setTimeout(function(){
-  //  // window.location.reload(1);
-  //   $('#right-pane').load('property-detailed.php #right-pane', function() {
+   setTimeout(function(){
+     window.location.reload(1);
+     $('#right-pane').load('property-detailed.php #right-pane', function() {
 
-  //          /// can add another function here
-  //     });     
-  //   }, 3000);    
+            /// can add another function here
+       });     
+     }, 3000);    
 });
 
