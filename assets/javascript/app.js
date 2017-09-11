@@ -42,7 +42,7 @@ $(document).ready(function () {
   $("#addTrain").on("click", function (event) {
     event.preventDefault();
     // Check if user is logged in before allowing to add to the database    
-    //if(status){
+    if(status){
       trainName = capitalizeStr($("#trainName").val().trim());
       destination = capitalizeStr($("#destination").val().trim());
       firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
@@ -70,9 +70,9 @@ $(document).ready(function () {
       }else {
         $("#message").text("All form fields are required.");
       }
-    // }else {
-         //    $("#message").text("Sign In to check train times!");
-         // }
+     }else {
+             $("#message").text("Sign In to check train times!");
+          }
     });
 
   // Function checks for new child added to database and updates the html display    
@@ -148,7 +148,7 @@ $(document).ready(function () {
   // Function handles the deletion of records
   $("body").on("click", "#delete", function(e){
     e.preventDefault();
-    //if(status) {
+    if(status) {
       var key = $(this).attr("data-key");
       console.log(key);
       database.ref().orderByChild('id').equalTo(key).once('value').then(function(snapshot) {
@@ -157,9 +157,9 @@ $(document).ready(function () {
           database.ref().child(childSnapshot.key).remove();
         });
       });
-    //}else {
-      // $("#message").text("You have to be signed in to edit!");  
-    //}  
+    }else {
+       $("#message").text("You have to be signed in to edit!");  
+    }  
   });
   
   function renderTable(sv) {
@@ -194,7 +194,7 @@ $(document).ready(function () {
   }
 
   function renderData(data) {
-    //var tableRows = [];
+    
     $("#tableBody").empty();
     data.forEach(function(item){
         // Current Time
