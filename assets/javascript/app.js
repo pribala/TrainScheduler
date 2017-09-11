@@ -23,6 +23,7 @@ $(document).ready(function () {
   var tMinutesTillTrain = 0;
   var status = false;
   var myKey = "";
+  
     
   // Function to capitalize the first letter of each category
   function capitalizeStr(str) {
@@ -36,7 +37,7 @@ $(document).ready(function () {
 
   // Call the validator plugin to validate the form
   $('#inputForm').validator();
-    
+       
   // Add new value to database when add train button is clicked
   $("#addTrain").on("click", function (event) {
     event.preventDefault();
@@ -79,11 +80,27 @@ $(document).ready(function () {
     // storing the snapshot.val() in a variable for convenience
     var sv = snapshot.val();
     renderTable(sv);
-    // Handle the errors
+
+  // Handle the errors
   }, function (errorObject) {
       console.log("inside added");
       console.log("Errors handled: " + errorObject.code);
   });
+
+  // Function refreshs table data to provide realtime train time every 60 secs  
+  setInterval(function(){  
+     
+    database.ref().once('value', function(snapshot) {
+        var trains = [];
+       snapshot.forEach(function(childSnapshot) {
+         var childKey = childSnapshot.key;
+         var childData = childSnapshot.val();
+         trains.push(childData);
+       });
+       $("#tableBody").empty(); 
+       renderData(trains);
+    });
+}, 60000);
         
   //Google sign in functionality
   var provider = new firebase.auth.GoogleAuthProvider();
@@ -155,7 +172,7 @@ $(document).ready(function () {
         
         // Minute Until Train
         tMinutesTillTrain = sv.frequency - tRemainder;
-        // setTimeout(function() {    
+         
         // Next Train
         nextTrain = moment().add(tMinutesTillTrain, "minutes");
         var tableRow = $("<tr>");
@@ -164,6 +181,7 @@ $(document).ready(function () {
         var trainFrequency = $("<td>").text(sv.frequency);
         var nextTrainTime = $("<td>").text(moment(nextTrain).format("HH:mm"));
         var trainInMinutes = $("<td>").text(tMinutesTillTrain);
+        trainInMinutes.attr("id", "MinutesToTrain");
         var dataButtons = $("<td>");
         var btn = $("<button>");
         btn.attr("id", "delete");
@@ -173,15 +191,40 @@ $(document).ready(function () {
         dataButtons.append(btn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
-      // }, 3000);
   }
 
-   setTimeout(function(){
-     //window.location.reload(1);
-     $('#tbody').load('property-detailed.php #tbody', function() {
-
-            /// can add another function here
-       });     
-     }, 5000);    
+  function renderData(data) {
+    //var tableRows = [];
+    $("#tableBody").empty();
+    data.forEach(function(item){
+        // Current Time
+        var currentTime = moment();
+        
+        var diffTime =moment(currentTime,"X").diff(moment(item.firstTrainTime,"X"), "minutes");
+        
+        var tRemainder = diffTime % item.frequency;
+        
+        // Minute Until Train
+        tMinutesTillTrain = item.frequency - tRemainder;
+         
+        // Next Train
+        nextTrain = moment().add(tMinutesTillTrain, "minutes");
+        var tableRow = $("<tr>");
+        var name = $("<td>").text(item.trainName);
+        var trainDestination = $("<td>").text(item.destination);
+        var trainFrequency = $("<td>").text(item.frequency);
+        var nextTrainTime = $("<td>").text(moment(nextTrain).format("HH:mm"));
+        var trainInMinutes = $("<td>").text(tMinutesTillTrain);
+        var dataButtons = $("<td>");
+        var btn = $("<button>");
+        btn.attr("id", "delete");
+        btn.html("<i class='fa fa-trash' aria-hidden='true'>");
+        btn.addClass("btnClass");
+        btn.attr("data-key", item.id);
+        dataButtons.append(btn);
+        tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
+        $("#tableBody").append(tableRow);
+    });  
+  }
 });
 
