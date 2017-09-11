@@ -177,11 +177,11 @@ $(document).ready(function () {
   }
 
    setTimeout(function(){
-     window.location.reload(1);
-     $('#right-pane').load('property-detailed.php #right-pane', function() {
+     //window.location.reload(1);
+     $('#tbody').load('property-detailed.php #tbody', function() {
 
             /// can add another function here
        });     
-     }, 3000);    
+     }, 5000);    
 });
 

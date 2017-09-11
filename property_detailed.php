@@ -1,4 +1,4 @@
-<div class="col-lg-8 col-xs-12" id="right-pane">
+<!-- <div class="col-lg-8 col-xs-12" id="right-pane">
 	<div class="card">
         <div class="card-header">
             <strong>Current Train Schedule</strong>
@@ -13,9 +13,9 @@
 		                <td>Next Arrival</td>
 			            <td>Minutes Away</td>
 	            	</tr>
-	        	</thead>
+	        	</thead> -->
 	        	<tbody id="tableBody"></tbody>
-	   		</table>
+	   		<!-- </table>
     	</div>
     </div>
-</div>
+</div> -->
