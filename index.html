@@ -48,8 +48,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="firstTrainTime">First Train Time (HH:mm - military time)</label>
-                                <input type="text" class="form-control" id="firstTrainTime" placeholder="Enter first train time" data-required="true" required>
-                                <span class="help-block error--required">Please enter a valid time</span>
+                                <input type="text" data-required="true" data-pattern="^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$" class="form-control" id="firstTrainTime" placeholder="Enter first train time" required>
+                                <span class="help-block error--required error--pattern">Please enter a valid time</span>
                             </div>
 
                             <div class="form-group">
@@ -100,6 +100,6 @@
 </body>
 </html>
 
-<!-- validate time , display messages in a popover, update readme
+<!-- update readme
 add edit features,
 -->

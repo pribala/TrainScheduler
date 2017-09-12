@@ -46,6 +46,7 @@ $(document).ready(function () {
       destination = capitalizeStr($("#destination").val().trim());
       firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
       firstTrainTime = moment(firstTrainTime, "HHmm").subtract(1, "years");
+      console.log(firstTrainTime);
       unixTime = moment(firstTrainTime, "HHmm").unix();
       frequency = $("#frequency").val().trim();
       if(trainName && destination && firstTrainTime && frequency){
@@ -70,9 +71,9 @@ $(document).ready(function () {
         $("#message").text("All form fields are required.");
       }
      }else {
-             //$("#message").text("Sign In to check train times!");
-          }
-    });
+            $("#message").text("Sign In to check train times!");
+     }
+  });
 
   // Function checks for new child added to database and updates the html display    
   database.ref().on("child_added", function (snapshot) {
