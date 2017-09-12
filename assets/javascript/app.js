@@ -72,6 +72,7 @@ $(document).ready(function () {
       }
      }else {
              $("#message").text("Sign In to check train times!");
+             $("#addTrain").popover('show');
           }
     });
 
@@ -157,7 +158,8 @@ $(document).ready(function () {
         });
       });
     }else {
-       $("#message").text("You have to be signed in to edit!");  
+       $("#message").text("You have to be signed in to edit!"); 
+
     }  
   });
   
