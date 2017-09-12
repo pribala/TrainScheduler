@@ -1,5 +1,5 @@
 jQuery.noConflict();
-$(document).ready(function () {
+$(document).ready(function ($) {
 
   // Initialize Firebase
 
