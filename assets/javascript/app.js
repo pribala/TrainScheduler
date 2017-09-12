@@ -150,7 +150,6 @@ $(document).ready(function () {
     e.preventDefault();
     if(status) {
       var key = $(this).attr("data-key");
-      console.log(key);
       database.ref().orderByChild('id').equalTo(key).once('value').then(function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
           //remove each child
