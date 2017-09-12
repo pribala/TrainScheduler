@@ -188,13 +188,14 @@ $(document).ready(function () {
         btn.addClass("btnClass");
         btn.attr("data-key", sv.id);
 
+        
+        
+        dataButtons.append(btn);
         var yourPopoverContent = 'You have to be logged in to delete an item';
         $('#delete').popover({
             html : true,
             content : yourPopoverContent      
         });
-        
-        dataButtons.append(btn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
   }
