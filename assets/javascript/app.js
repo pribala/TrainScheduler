@@ -71,7 +71,7 @@ $(document).ready(function () {
         $("#message").text("All form fields are required.");
       }
      }else {
-             $("#message").text("Sign In to check train times!");
+             //$("#message").text("Sign In to check train times!");
              $("#addTrain").popover('show');
           }
     });
