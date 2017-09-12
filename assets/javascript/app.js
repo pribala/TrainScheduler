@@ -158,7 +158,7 @@ $(document).ready(function () {
       });
     }else {
        //$("#message").text("You have to be signed in to edit!"); 
-       $("button").popover("show");
+       $("#delete").popover("show");
     }  
   });
   
