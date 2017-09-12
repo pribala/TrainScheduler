@@ -71,7 +71,6 @@ $(document).ready(function () {
       }
      }else {
              //$("#message").text("Sign In to check train times!");
-             $(this).popover('show');
           }
     });
 
@@ -157,8 +156,8 @@ $(document).ready(function () {
         });
       });
     }else {
-       //$("#message").text("You have to be signed in to edit!"); 
-       $(this).popover("show");
+       //$("#message").text("You have to be signed in to edit!");
+       $(this).popover('show');
     }  
   });
   
@@ -188,8 +187,13 @@ $(document).ready(function () {
         btn.html("<i class='fa fa-trash' aria-hidden='true'>");
         btn.addClass("btnClass");
         btn.attr("data-key", sv.id);
-        btn.attr("data-toggle", "popover");
-        btn.attr("data-content", "You have to be signed in to delete!");
+
+        var yourPopoverContent = 'You have to be logged in to delete an item';
+        $('#delete').popover({
+            html : true,
+            content : yourPopoverContent      
+        });
+        
         dataButtons.append(btn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
@@ -223,8 +227,13 @@ $(document).ready(function () {
         btn.html("<i class='fa fa-trash' aria-hidden='true'>");
         btn.addClass("btnClass");
         btn.attr("data-key", item.id);
-        btn.attr("data-toggle", "popover");
-        btn.attr("data-content", "You have to be signed in to delete!");
+
+        var yourPopoverContent = 'You have to be logged in to delete an item';
+        $('#delete').popover({
+            html : true,
+            content : yourPopoverContent      
+        });
+
         dataButtons.append(btn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
