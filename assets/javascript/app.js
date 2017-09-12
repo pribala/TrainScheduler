@@ -147,6 +147,11 @@ $(document).ready(function () {
   // Function handles the deletion of records
   $("body").on("click", "#delete", function(e){
     e.preventDefault();
+    var yourPopoverContent = 'You have to be signed in to delete!';
+        $(this).popover({
+            content : yourPopoverContent,
+            placement: 'left'      
+    });
     if(status) {
       var key = $(this).attr("data-key");
       database.ref().orderByChild('id').equalTo(key).once('value').then(function(snapshot) {
@@ -156,8 +161,9 @@ $(document).ready(function () {
         });
       });
     }else {
-       //$("#message").text("You have to be signed in to edit!");
-       $(this).popover('show');
+       var $this = $(this);
+       $this.popover('show');
+       setTimeout(function() {$this.popover('dispose')},2000);
     }  
   });
   
@@ -187,15 +193,7 @@ $(document).ready(function () {
         btn.html("<i class='fa fa-trash' aria-hidden='true'>");
         btn.addClass("btnClass");
         btn.attr("data-key", sv.id);
-
-        
-        
         dataButtons.append(btn);
-        var yourPopoverContent = 'You have to be logged in to delete an item';
-        $('#delete').popover({
-            html : true,
-            content : yourPopoverContent      
-        });
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
   }
@@ -228,13 +226,6 @@ $(document).ready(function () {
         btn.html("<i class='fa fa-trash' aria-hidden='true'>");
         btn.addClass("btnClass");
         btn.attr("data-key", item.id);
-
-        var yourPopoverContent = 'You have to be logged in to delete an item';
-        $('#delete').popover({
-            html : true,
-            content : yourPopoverContent      
-        });
-
         dataButtons.append(btn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
