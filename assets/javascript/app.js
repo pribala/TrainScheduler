@@ -71,8 +71,7 @@ $(document).ready(function () {
         $("#message").text("All form fields are required.");
       }
      }else {
-             //$("#message").text("Sign In to check train times!");
-             $("#addTrain").popover('show');
+             $("#message").text("Sign In to check train times!");
           }
     });
 
@@ -158,8 +157,8 @@ $(document).ready(function () {
         });
       });
     }else {
-       $("#message").text("You have to be signed in to edit!"); 
-
+       //$("#message").text("You have to be signed in to edit!"); 
+       $("button").popover("show");
     }  
   });
   
@@ -189,6 +188,8 @@ $(document).ready(function () {
         btn.html("<i class='fa fa-trash' aria-hidden='true'>");
         btn.addClass("btnClass");
         btn.attr("data-key", sv.id);
+        btn.attr("data-toggle", "popover");
+        btn.attr("data-content", "You have to be signed in to delete!");
         dataButtons.append(btn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
