@@ -158,7 +158,7 @@ $(document).ready(function () {
       });
     }else {
        //$("#message").text("You have to be signed in to edit!"); 
-       $("#delete").popover("show");
+       $(this).popover("show");
     }  
   });
   
@@ -223,6 +223,8 @@ $(document).ready(function () {
         btn.html("<i class='fa fa-trash' aria-hidden='true'>");
         btn.addClass("btnClass");
         btn.attr("data-key", item.id);
+        btn.attr("data-toggle", "popover");
+        btn.attr("data-content", "You have to be signed in to delete!");
         dataButtons.append(btn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);

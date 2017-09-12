@@ -52,29 +52,29 @@
     // 5 + 3:16 = 3:21
 
     // Assumptions
-    var tFrequency = 3;
-    // Time is 3:30 AM
-    var firstTime = "23:30";
-    //firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
-      //  unixTime = moment(firstTrainTime, "HHmm").unix();
-var newTime = moment(firstTime, "HH:mm").subtract(1, "years");
-console.log("new time "+newTime);
-    // First Time (pushed back 1 year to make sure it comes before current time)
-     var newTimeConverted = moment(newTime, "HH:mm").format("HHmm");
-     console.log("converted " +newTimeConverted);
-    var firstTimeConverted = moment(firstTime, "HH:mm").format("HHmm");
-    console.log(firstTimeConverted);
-    var unixTime = moment(firstTimeConverted, "HHmm").unix();
-    console.log(unixTime);
+//     var tFrequency = 3;
+//     // Time is 3:30 AM
+//     var firstTime = "23:30";
+//     //firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
+//       //  unixTime = moment(firstTrainTime, "HHmm").unix();
+// var newTime = moment(firstTime, "HH:mm").subtract(1, "years");
+// console.log("new time "+newTime);
+//     // First Time (pushed back 1 year to make sure it comes before current time)
+//      var newTimeConverted = moment(newTime, "HH:mm").format("HHmm");
+//      console.log("converted " +newTimeConverted);
+//     var firstTimeConverted = moment(firstTime, "HH:mm").format("HHmm");
+//     console.log(firstTimeConverted);
+//     var unixTime = moment(firstTimeConverted, "HHmm").unix();
+//     console.log(unixTime);
 
 
-    // Current Time
-    var currentTime = moment();
-    console.log("CURRENT TIME: " + moment(currentTime).format("HHmm"));
-    var currentUnixTime = moment(currentTime, "HHmm").unix();
-    console.log(currentUnixTime);
-var diffTime =moment(unixTime,"X").diff(moment(currentTime,"X"), "minutes");
-console.log("DIFFERENCE IN TIME: " + diffTime);
+//     // Current Time
+//     var currentTime = moment();
+//     console.log("CURRENT TIME: " + moment(currentTime).format("HHmm"));
+//     var currentUnixTime = moment(currentTime, "HHmm").unix();
+//     console.log(currentUnixTime);
+// var diffTime =moment(unixTime,"X").diff(moment(currentTime,"X"), "minutes");
+// console.log("DIFFERENCE IN TIME: " + diffTime);
     // Difference between the times
     // var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
     // console.log("DIFFERENCE IN TIME: " + diffTime);
