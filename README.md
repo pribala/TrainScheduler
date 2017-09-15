@@ -8,3 +8,5 @@ Authentication is done through Google SignIn. Only an authenticated user can edi
 An authenticated user has the ability to add, delete and update train records. The train time updates every minute to reflect realtime data.
 
 The app uses Firebase database for persistent data storage and authentication.
+
+Form validation is done using the validator.js plugin.

@@ -150,6 +150,7 @@ $(document).ready(function () {
         status = false;
         $("#signIn").text("Google SignIn");
         console.log('Signout Succesfull')
+        $("#welcomeMessage").text("");
       }).catch(function(error) {
         // An error happened.
         console.log('Signout Failed')  
