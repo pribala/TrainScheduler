@@ -1,6 +1,6 @@
 $(document).ready(function () {
   // Initialize Firebase
-
+  $("#update").hide();
   var config = {
     apiKey: "AIzaSyCW8mnSkargRBI-0MKnf4YKu58BkB5GkaQ",
     authDomain: "trying-firebase-55eab.firebaseapp.com",
@@ -59,12 +59,7 @@ $(document).ready(function () {
           frequency: frequency,
           id: myKey
         });
-
-        // if(operation === "update") {
-        //   console.log("update");
-        //   operation = "add";
-        // }
-                                
+             
         // Clear the input fields after data is added to database
         $("#message").text("");
         $("#welcomeMessage").text("");
@@ -92,6 +87,43 @@ $(document).ready(function () {
       console.log("Errors handled: " + errorObject.code);
   });
 
+  // Function checks for change in child and updates the html display    
+  database.ref().on("child_changed", function (snapshot) {
+    database.ref().once('value', function(snapshot) {
+        var trains = [];
+       snapshot.forEach(function(childSnapshot) {
+         var childKey = childSnapshot.key;
+         var childData = childSnapshot.val();
+         trains.push(childData);
+       });
+       $("#tableBody").empty(); 
+       renderData(trains);
+    });
+   
+  // Handle the errors
+  }, function (errorObject) {
+      console.log("inside added");
+      console.log("Errors handled: " + errorObject.code);
+  });
+
+  // Function checks for deletion of child and updates the html display    
+  database.ref().on("child_removed", function (snapshot) {
+    database.ref().once('value', function(snapshot) {
+        var trains = [];
+       snapshot.forEach(function(childSnapshot) {
+         var childKey = childSnapshot.key;
+         var childData = childSnapshot.val();
+         trains.push(childData);
+       });
+       $("#tableBody").empty(); 
+       renderData(trains);
+    });
+    
+  // Handle the errors
+  }, function (errorObject) {
+      console.log("inside added");
+      console.log("Errors handled: " + errorObject.code);
+  });
   // Function refreshs table data to provide realtime train time every 60 secs  
   setInterval(function(){  
      
@@ -176,12 +208,14 @@ $(document).ready(function () {
   // Function handles the editing of records
   $("body").on("click", "#edit", function(e){
     e.preventDefault();
+
     var yourPopoverContent = 'You have to be signed in to edit!';
         $(this).popover({
             content : yourPopoverContent,
             placement: 'left'      
     });
     if(status) {
+      $("#update").show();
       var key = $(this).attr("data-key");
       database.ref().orderByChild("id").equalTo(key).once('value').then(function(snapshot){
           var data = Object.values(snapshot.val())[0]; 
@@ -192,6 +226,7 @@ $(document).ready(function () {
           $("#firstTrainTime").val(moment.unix(data.firstTrainTime).format("HH:mm"));
           $("#frequency").val(data.frequency);
           $("#update").attr("data-id", dataKey);
+          
       });
     }else {
        var $this = $(this);
@@ -202,24 +237,28 @@ $(document).ready(function () {
 
   $("#update").on("click", function(e) {
         e.preventDefault();
-
-        trainName = capitalizeStr($("#trainName").val().trim());
-        destination = capitalizeStr($("#destination").val().trim());
-        firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
-        firstTrainTime = moment(firstTrainTime, "HHmm").subtract(1, "years");
-        unixTime = moment(firstTrainTime, "HHmm").unix();
-        frequency = $("#frequency").val().trim();
-        var trainId = $(this).attr("data-id");
-        
-        database.ref().child(trainId).update({trainName:trainName, destination:destination, firstTrainTime:unixTime, frequency:frequency});
-         $("#message").text("Data updated successfully!"); 
-        // Clear the input fields after data is added to database
-        
-        $("#welcomeMessage").text("");
-        $("#trainName").val("");
-        $("#destination").val("");
-        $("#firstTrainTime").val("");
-        $("#frequency").val("");
+        if(status){
+          trainName = capitalizeStr($("#trainName").val().trim());
+          destination = capitalizeStr($("#destination").val().trim());
+          firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
+          firstTrainTime = moment(firstTrainTime, "HHmm").subtract(1, "years");
+          unixTime = moment(firstTrainTime, "HHmm").unix();
+          frequency = $("#frequency").val().trim();
+          var trainId = $(this).attr("data-id");
+          
+          database.ref().child(trainId).update({trainName:trainName, destination:destination, firstTrainTime:unixTime, frequency:frequency});
+           $("#message").text("Data updated successfully!"); 
+          // Clear the input fields after data is added to database
+          
+          $("#welcomeMessage").text("");
+          $("#trainName").val("");
+          $("#destination").val("");
+          $("#firstTrainTime").val("");
+          $("#frequency").val("");
+          $("#update").hide();
+      }else {
+            $("#message").text("Sign In to edit train details!");
+     }    
     });
 
   function renderTable(sv) {
