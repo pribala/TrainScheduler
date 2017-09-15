@@ -247,7 +247,7 @@ $(document).ready(function () {
           var trainId = $(this).attr("data-id");
           
           database.ref().child(trainId).update({trainName:trainName, destination:destination, firstTrainTime:unixTime, frequency:frequency});
-           $("#message").text("Data updated successfully!"); 
+           //$("#message").text("Data updated successfully!"); 
           // Clear the input fields after data is added to database
           
           $("#welcomeMessage").text("");
