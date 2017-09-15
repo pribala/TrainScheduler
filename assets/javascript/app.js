@@ -22,6 +22,7 @@ $(document).ready(function () {
   var tMinutesTillTrain = 0;
   var status = false;
   var myKey = "";
+  var operation = "add";
   
     
   // Function to capitalize the first letter of each category
@@ -46,7 +47,6 @@ $(document).ready(function () {
       destination = capitalizeStr($("#destination").val().trim());
       firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
       firstTrainTime = moment(firstTrainTime, "HHmm").subtract(1, "years");
-      console.log(firstTrainTime);
       unixTime = moment(firstTrainTime, "HHmm").unix();
       frequency = $("#frequency").val().trim();
       if(trainName && destination && firstTrainTime && frequency){
@@ -59,6 +59,11 @@ $(document).ready(function () {
           frequency: frequency,
           id: myKey
         });
+
+        // if(operation === "update") {
+        //   console.log("update");
+        //   operation = "add";
+        // }
                                 
         // Clear the input fields after data is added to database
         $("#message").text("");
@@ -167,8 +172,58 @@ $(document).ready(function () {
        setTimeout(function() {$this.popover('dispose')},2000);
     }  
   });
-  
+
+  // Function handles the editing of records
+  $("body").on("click", "#edit", function(e){
+    e.preventDefault();
+    var yourPopoverContent = 'You have to be signed in to edit!';
+        $(this).popover({
+            content : yourPopoverContent,
+            placement: 'left'      
+    });
+    if(status) {
+      var key = $(this).attr("data-key");
+      database.ref().orderByChild("id").equalTo(key).once('value').then(function(snapshot){
+          var data = Object.values(snapshot.val())[0]; 
+          var dataKey = Object.keys(snapshot.val())[0];
+         
+          $("#trainName").val(data.trainName);
+          $("#destination").val(data.destination);
+          $("#firstTrainTime").val(moment.unix(data.firstTrainTime).format("HH:mm"));
+          $("#frequency").val(data.frequency);
+          $("#update").attr("data-id", dataKey);
+      });
+    }else {
+       var $this = $(this);
+       $this.popover('show');
+       setTimeout(function() {$this.popover('dispose')},2000);
+    }    
+  });  
+
+  $("#update").on("click", function(e) {
+        e.preventDefault();
+
+        trainName = capitalizeStr($("#trainName").val().trim());
+        destination = capitalizeStr($("#destination").val().trim());
+        firstTrainTime = moment($("#firstTrainTime").val().trim(),"HH:mm").format("HHmm");
+        firstTrainTime = moment(firstTrainTime, "HHmm").subtract(1, "years");
+        unixTime = moment(firstTrainTime, "HHmm").unix();
+        frequency = $("#frequency").val().trim();
+        var trainId = $(this).attr("data-id");
+        
+        database.ref().child(trainId).update({trainName:trainName, destination:destination, firstTrainTime:unixTime, frequency:frequency});
+         $("#message").text("Data updated successfully!"); 
+        // Clear the input fields after data is added to database
+        
+        $("#welcomeMessage").text("");
+        $("#trainName").val("");
+        $("#destination").val("");
+        $("#firstTrainTime").val("");
+        $("#frequency").val("");
+    });
+
   function renderTable(sv) {
+
       // Current Time
         var currentTime = moment();
         
@@ -189,12 +244,17 @@ $(document).ready(function () {
         var trainInMinutes = $("<td>").text(tMinutesTillTrain);
         trainInMinutes.attr("id", "MinutesToTrain");
         var dataButtons = $("<td>");
-        var btn = $("<button>");
+        var btn = $("<span>");
         btn.attr("id", "delete");
         btn.html("<i class='fa fa-trash' aria-hidden='true'>");
         btn.addClass("btnClass");
         btn.attr("data-key", sv.id);
-        dataButtons.append(btn);
+        var editBtn = $("<span>");
+        editBtn.attr("id", "edit");
+        editBtn.html("<i class='fa fa-pencil' aria-hidden='true'></i>");
+        editBtn.addClass("btnClass");
+        editBtn.attr("data-key", sv.id);
+        dataButtons.append(btn).append(editBtn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
   }
@@ -222,12 +282,17 @@ $(document).ready(function () {
         var nextTrainTime = $("<td>").text(moment(nextTrain).format("HH:mm"));
         var trainInMinutes = $("<td>").text(tMinutesTillTrain);
         var dataButtons = $("<td>");
-        var btn = $("<button>");
+        var btn = $("<span>");
         btn.attr("id", "delete");
         btn.html("<i class='fa fa-trash' aria-hidden='true'>");
         btn.addClass("btnClass");
         btn.attr("data-key", item.id);
-        dataButtons.append(btn);
+        var editBtn = $("<span>");
+        editBtn.attr("id", "edit");
+        editBtn.html("<i class='fa fa-pencil' aria-hidden='true'></i>");
+        editBtn.addClass("btnClass");
+        editBtn.attr("data-key", item.id);
+        dataButtons.append(btn).append(editBtn);
         tableRow.append(name).append(trainDestination).append(trainFrequency).append(nextTrainTime).append(trainInMinutes).append(dataButtons);
         $("#tableBody").append(tableRow);
     });  
